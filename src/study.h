@@ -79,7 +79,7 @@ void addNum(std::vector<int> &numbers){
     std::cin >> input;
     try {
         num = std::stoi(input);
-    } catch (std::invalid_argument) {
+    } catch (std::invalid_argument()) {
         std::cout << "Error. Argument invalid." << std::endl;
         return;
     }
