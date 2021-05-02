@@ -97,16 +97,10 @@ void meanOfNums(std::vector<int> &numbers, bool small){
 }
 
 void theNum(std::vector<int> &numbers, bool small){
-    bool initialized = false;
-    int result{};
+    int result = numbers.at(0);
     for (auto i: numbers){
-        if (!initialized
-                || ((i <= result) && small)
-                || ((i >= result) && !small))
-        {
-            initialized = true;
+        if (((i < result) && small) || ((i > result) && !small))
             result = i;
-        }
     }
     std::string str = small ? "smallest" : "largest";
     std::cout << "The " << str << " number is " << result << std::endl;
