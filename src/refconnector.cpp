@@ -3,13 +3,13 @@
 
 void Test::call() {
     emit (this->*signalPointer)();
-    emit (this->getSignal(Value::FirstValue));
+//    emit (this->getSignal(Value::FirstValue));
 }
 
 Test::functionPointer Test::getSignal(Value value){
-    switch (value){
-        case FirstValue: return &Test::signalOne;
-        case SecondValue: return &Test::signalTwo;
-    }
+//    switch (value){
+//        case FirstValue: return &Test::signalOne;
+//        case SecondValue: return &Test::signalTwo;
+//    }
     return &Test::signalOne;
 }
