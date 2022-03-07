@@ -19,7 +19,13 @@ SOURCES += \
         main.cpp \
     refconnector.cpp \
     rpcmethod.cpp \
-    reqtypes.cpp
+    reqtypes.cpp \
+    closest_zero.cpp \
+    deleteNode.cpp \
+    findElement.cpp \
+    printLinkedList.cpp \
+    reverseOrder.cpp \
+    sleight_of_hand.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
