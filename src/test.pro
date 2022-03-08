@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     algorithms.cpp \
+    bracket_sequence.cpp \
         main.cpp \
     refconnector.cpp \
     rpcmethod.cpp \
@@ -25,7 +26,8 @@ SOURCES += \
     findElement.cpp \
     printLinkedList.cpp \
     reverseOrder.cpp \
-    sleight_of_hand.cpp
+    sleight_of_hand.cpp \
+    stackmax.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -37,6 +39,8 @@ HEADERS += \
     macro.h \
     objects.h \
     solution.h \
+    stack.h \
+    stackmax.h \
     study.h \
     refconnector.h \
     rpcmethod.h \
