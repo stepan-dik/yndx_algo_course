@@ -36,6 +36,7 @@ HEADERS += \
     algorithms.h \
     macro.h \
     objects.h \
+    solution.h \
     study.h \
     refconnector.h \
     rpcmethod.h \

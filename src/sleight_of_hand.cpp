@@ -15,20 +15,14 @@ int main()
 
     int fullK = k*2;
     int result = 0;
-    std::array<char, 10> chars;
-    for (int i = 0; i < 10; ++i) {
-        chars[i] = '0' + i;
+    std::array<char, 10> chars{0};
+
+    for (unsigned int i = 0; i < str.length(); ++i) {
+        chars[str[i]-'0']++;
     }
 
     for (const auto c: chars) {
-        int repeats = 0;
-        for (const auto el: str) {
-            if (el == c)
-                ++repeats;
-            if (repeats > fullK)
-                break;
-        }
-        if (repeats <= fullK && repeats > 0)
+        if (c <= fullK && c > 0)
             ++result;
     }
 
