@@ -17,6 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     algorithms.cpp \
     bracket_sequence.cpp \
+    calculator_polish.cpp \
+    deck.cpp \
+    limited_queue.cpp \
         main.cpp \
     refconnector.cpp \
     rpcmethod.cpp \
@@ -36,7 +39,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     algorithms.h \
+    deck.h \
+    limited_queue.h \
     macro.h \
+    nodes.h \
     objects.h \
     solution.h \
     stack.h \

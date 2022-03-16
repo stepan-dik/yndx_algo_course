@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include "stack.h"
+namespace BracketSeq {
 
 int main()
 {
@@ -35,4 +36,5 @@ int main()
 
     return 0;
 
+}
 }

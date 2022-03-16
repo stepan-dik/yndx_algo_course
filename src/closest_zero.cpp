@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+namespace{
 int main()
 {
     int size = 0;
@@ -36,4 +36,5 @@ int main()
         std::cout << arr[i] << " ";
 
     return 0;
+}
 }

@@ -1,4 +1,5 @@
 #include "solution.h"
+using namespace reverse;
 
 Node* solution(Node* head, int idx)
 {

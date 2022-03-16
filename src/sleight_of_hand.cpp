@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <array>
-
+namespace {
 int main()
 {
     int k = 0;
@@ -10,7 +10,7 @@ int main()
     std::cin >> k;
     std::string tp;
     while(getline(std::cin, tp)) {
-    	str.append(tp);
+        str.append(tp);
     }
 
     int fullK = k*2;
@@ -26,6 +26,7 @@ int main()
             ++result;
     }
 
-	std::cout << result;
-	return 0;
+    std::cout << result;
+    return 0;
+}
 }

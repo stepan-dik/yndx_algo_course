@@ -1,5 +1,7 @@
 #include "algorithms.h"
 
+using namespace Algs;
+
 double* Algorithms::movingAverage(double* array, const size_t size, const int k)
 {
     auto resultSize = size - k + 1;
@@ -500,4 +502,31 @@ Node* Algorithms::inverseOrder(Node *head)
         head = nxt;
     }
     return cur;
+}
+
+int Algorithms::fibonacciFirst(int num)
+{
+    int curr = 1;
+    int prev = 1;
+    for (;num > 1;--num) {
+        auto tmp = curr;
+        curr = prev + curr;
+        prev = tmp;
+    }
+    return curr;
+}
+
+int Algorithms::fibonacciMod(int n, int k)
+{
+    int curr = 1;
+    int prev = 1;
+    while(n > 1) {
+        auto tmp = curr;
+        curr = prev + curr;
+        prev = tmp;
+        curr %= static_cast<int>(std::pow(10,k));
+        prev %= static_cast<int>(std::pow(10,k));
+        --n;
+    }
+    return curr;
 }

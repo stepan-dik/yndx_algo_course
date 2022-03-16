@@ -1,5 +1,6 @@
 #include "solution.h"
-
+#include <iostream>
+using namespace reverse;
 /*
 Comment it before submitting
 struct Node {  

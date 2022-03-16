@@ -24,7 +24,7 @@ RetVal<int> StackMax::get_max()
 {
     return maximums.peek();
 }
-
+namespace {
 int main()
 {
     StackMax theStack;
@@ -53,4 +53,5 @@ int main()
     }
 
     return 0;
+}
 }

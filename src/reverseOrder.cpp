@@ -1,5 +1,7 @@
 #include "solution.h"
 
+using namespace reverse;
+namespace{
 Node* solution(Node* head) {
     Node* nxt = nullptr;
     Node* cur = nullptr;
@@ -11,4 +13,5 @@ Node* solution(Node* head) {
         head = nxt;
     }
     return cur;
+}
 }

@@ -11,6 +11,8 @@
 #include <string>
 #include <cmath>
 
+namespace Algs {
+
 struct Node {
     Node(const std::string &value, Node* next, Node* prev = nullptr)
         : value(value)
@@ -52,6 +54,9 @@ public:
     static Node* deleteNode(Node*, int);
     static int index(Node*, const std::string&);
     static Node* inverseOrder(Node*);
+    static int fibonacciFirst(int);
+    static int fibonacciMod(int, int);
 };
 
+}
 #endif // ALGORITHMS_H
