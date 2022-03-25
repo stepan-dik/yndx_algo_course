@@ -37,54 +37,43 @@ struct Element {
 
 bool operator>(const Element& lhs, const Element& rhs)
 {
-    if (lhs.tasks_solved > rhs.tasks_solved)
-        return true;
-    else if (lhs.tasks_solved == rhs.tasks_solved) {
-        if (lhs.penalty < rhs.penalty)
-            return true;
-        else if (lhs.penalty == rhs.penalty){
-            if (lhs.name < rhs.name)
-                return true;
-            else if (lhs.name == rhs.name)
-                return lhs.pos < rhs.pos;
+    if (lhs.tasks_solved != rhs.tasks_solved)
+        return lhs.tasks_solved > rhs.tasks_solved;
+    else {
+        if (lhs.penalty != rhs.penalty)
+            return lhs.penalty < rhs.penalty;
+        else {
+            if (lhs.name != rhs.name)
+                return lhs.name < rhs.name;
             else
-                return false;
+                return lhs.pos < rhs.pos;
         }
-        else
-            return false;
     }
-    else
-        return false;
-}
-
-void swap(std::vector<Element>& vec, int l_idx, int r_idx)
-{
-    Element tmp_el = vec.at(l_idx);
-    vec[l_idx] = vec[r_idx];
-    vec[r_idx] = tmp_el;
 }
 
 void quicksort_inplace(std::vector<Element>& vec, int l_bound, int r_bound)
 {
     if (r_bound - l_bound < 2){
         if (r_bound - l_bound == 1 && vec.at(r_bound) > vec.at(l_bound))
-            swap(vec, l_bound, r_bound);
+            std::swap(vec[r_bound], vec[l_bound]);
         return;
     }
     auto pivot = vec[rand() % (r_bound - l_bound) + l_bound];
     int l_cur = l_bound;
     int r_cur = r_bound;
 
-    while (l_cur < r_cur){
+    while (l_cur <= r_cur){
         while (vec.at(l_cur) > pivot) {
             ++l_cur;
         }
         while (pivot > vec.at(r_cur)) {
             --r_cur;
         }
-        swap(vec, l_cur, r_cur);
+        if (l_cur >= r_cur)
+            break;
+        std::swap(vec[l_cur], vec[r_cur]);
     }
-    quicksort_inplace(vec, l_bound, l_cur);
+    quicksort_inplace(vec, l_bound, r_cur);
     quicksort_inplace(vec, r_cur, r_bound);
 }
 
