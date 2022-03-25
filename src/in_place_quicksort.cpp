@@ -1,3 +1,29 @@
+/*
+    --- ПРИНЦИП РАБОТЫ ---
+  Принцип работы алгоритма описан в задании. За основу взят алгоритм
+быстрой сортировки, также используется опорный элемент, но вместо
+создания новых массивов, массив делится на участки, отсортированные
+относительно опорного элемента, т.е. с одной стороны находятся все
+элементы больше опорного, а с другой -- меньшего. Достигается это с
+помощью двух указателей, которые двигаются навстречу друг к другу,
+пока элементы, на которые они указываю,  находятся на правильной
+стороне участка массива. Когда условие перестаёт соблюдаться для обоих
+указателей, элементы меняются местами, а указатели продолжают
+двигаться, пока не встретятся. На этом моменте разбиение на участки
+окончено. Функция рекурсивно вызывается для обоих участков массива.
+Базовым случаем является участок массива длиной менее 3-х элементов.
+
+    --- ВРЕМЕННАЯ СЛОЖНОСТЬ ---
+  Алгоритм имеет временную сложность O(n*log(n)). В худшем случае для
+отсортированного массива, если опорным элементом всегда будет
+выбираться наибольший или наименьший элемент участка массива,
+временная сложность составит О(n^2).
+
+    --- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ ---
+  Так как на каждом уровне рекурсии требуется константное количество
+памяти, пространственная сложность алгоритма составляет O(log(n)).
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -40,41 +66,26 @@ void swap(std::vector<Element>& vec, int l_idx, int r_idx)
 
 void quicksort_inplace(std::vector<Element>& vec, int l_bound, int r_bound)
 {
-    static int rec{0};
-    std::cout << "/--------------------\\" << rec << std::endl;
-    rec++;
     if (r_bound - l_bound < 2){
-        if (r_bound - l_bound == 1 && vec.at(l_bound) > vec.at(r_bound))
+        if (r_bound - l_bound == 1 && vec.at(r_bound) > vec.at(l_bound))
             swap(vec, l_bound, r_bound);
-        rec--;
-        std::cout << "\\____________________/" << rec << std::endl;
         return;
     }
-    int pivot = rand() % (r_bound - l_bound) + l_bound;
-    auto piv_el = vec[pivot];
-    std::cout << "pivot " << pivot << " val " << vec.at(pivot).tasks_solved << std::endl;
+    auto pivot = vec[rand() % (r_bound - l_bound) + l_bound];
     int l_cur = l_bound;
     int r_cur = r_bound;
 
     while (l_cur < r_cur){
-        while (piv_el > vec.at(l_cur)) {
+        while (vec.at(l_cur) > pivot) {
             ++l_cur;
         }
-        while (vec.at(r_cur) > piv_el) {
+        while (pivot > vec.at(r_cur)) {
             --r_cur;
         }
         swap(vec, l_cur, r_cur);
     }
-
-    for (int i = l_bound; i <= r_bound; ++i)
-        std::cout << vec[i].tasks_solved << " ";
-    std::cout << std::endl;
-
-    std::cout << "[" << l_bound << "] [" << l_cur << "] | [" << r_cur << "] [" << r_bound << "]" << std::endl;
     quicksort_inplace(vec, l_bound, l_cur);
     quicksort_inplace(vec, r_cur, r_bound);
-    rec--;
-    std::cout << "\\____________________/" << rec << std::endl;
 }
 
 int main()
@@ -93,8 +104,10 @@ int main()
     }
 
     quicksort_inplace(vec, 0, vec.size() - 1);
-    for (int i = vec.size()-1; i >= 0; --i)
-        std::cout << vec[i].name << " " << vec[i].tasks_solved << " " << vec[i].penalty
-                  << " " << vec[i].pos << std::endl;
+
+    for (const auto& i: vec)
+        std::cout << i.name << " " << i.tasks_solved << " "
+                  << i.penalty << " " << i.pos << std::endl;
+
     return 0;
 }

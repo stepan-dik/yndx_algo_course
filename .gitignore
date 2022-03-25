@@ -2,3 +2,4 @@
 src/test.pro.user
 build*
 *pycache*
+*.zip
