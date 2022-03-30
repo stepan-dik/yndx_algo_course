@@ -30,6 +30,7 @@ SOURCES += \
     findElement.cpp \
     printLinkedList.cpp \
     reverseOrder.cpp \
+    search_index.cpp \
     sleight_of_hand.cpp \
     stackmax.cpp
 
