@@ -21,44 +21,38 @@
 
     --- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ ---
   Так как на каждом уровне рекурсии требуется константное количество
-памяти, пространственная сложность алгоритма составляет O(log(n)).
+памяти, пространственная сложность алгоритма составляет O(log(n)), в худшем
+случае O(n).
 */
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-struct Element {
+struct Participant {
     std::string name;
     int tasks_solved = 0;
     int penalty = 0;
     int pos = 0;
 };
 
-bool operator>(const Element& lhs, const Element& rhs)
+bool operator>(const Participant& lhs, const Participant& rhs)
 {
     if (lhs.tasks_solved != rhs.tasks_solved)
         return lhs.tasks_solved > rhs.tasks_solved;
-    else {
-        if (lhs.penalty != rhs.penalty)
-            return lhs.penalty < rhs.penalty;
-        else {
-            if (lhs.name != rhs.name)
-                return lhs.name < rhs.name;
-            else
-                return lhs.pos < rhs.pos;
-        }
-    }
+    if (lhs.penalty != rhs.penalty)
+        return lhs.penalty < rhs.penalty;
+    if (lhs.name != rhs.name)
+        return lhs.name < rhs.name;
+    return lhs.pos < rhs.pos;
 }
 
-void quicksort_inplace(std::vector<Element>& vec, int l_bound, int r_bound)
+void quicksort_inplace(std::vector<Participant>& vec, int l_bound, int r_bound)
 {
-    if (r_bound - l_bound < 2){
-        if (r_bound - l_bound == 1 && vec.at(r_bound) > vec.at(l_bound))
-            std::swap(vec[r_bound], vec[l_bound]);
+    if (r_bound - l_bound < 2)
         return;
-    }
-    auto pivot = vec[rand() % (r_bound - l_bound) + l_bound];
+
+    auto pivot = vec[std::div(rand(), r_bound - l_bound).rem + l_bound];
     int l_cur = l_bound;
     int r_cur = r_bound;
 
@@ -71,7 +65,7 @@ void quicksort_inplace(std::vector<Element>& vec, int l_bound, int r_bound)
         }
         if (l_cur >= r_cur)
             break;
-        std::swap(vec[l_cur], vec[r_cur]);
+        std::swap(vec[l_cur++], vec[r_cur--]);
     }
     quicksort_inplace(vec, l_bound, r_cur);
     quicksort_inplace(vec, r_cur, r_bound);
@@ -81,10 +75,10 @@ int main()
 {
     int size = 0;
     std::cin >> size;
-    std::vector<Element> vec;
+    std::vector<Participant> vec;
 
     for (int i = 0; i < size; ++i) {
-        Element tmp;
+        Participant tmp;
         tmp.pos = i;
         std::cin >> tmp.name;
         std::cin >> tmp.tasks_solved;
