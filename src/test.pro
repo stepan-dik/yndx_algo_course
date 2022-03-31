@@ -19,6 +19,7 @@ SOURCES += \
     bracket_sequence.cpp \
     calculator_polish.cpp \
     deck.cpp \
+    hashtable.cpp \
     in_place_quicksort.cpp \
     limited_queue.cpp \
         main.cpp \
