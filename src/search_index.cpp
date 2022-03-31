@@ -5,6 +5,7 @@
 #include <iterator>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 #include <tuple>
 #include <algorithm>
 
@@ -51,7 +52,7 @@ int main()
         std::unordered_set<std::string> query_set;
         for (const auto& string: strings)
             query_set.insert(string);
-        std::vector<std::tuple<int, int>> scores;
+        std::map<int, int> scores;
         for (int j = 0; j < docs.size(); ++j) {
             int score = 0;
             auto doc = docs.at(j);
@@ -59,24 +60,16 @@ int main()
                 if (doc.find(string) != doc.end())
                     score += doc.at(string);
             }
-            scores.emplace_back(score, j);
+            if (score > 0)
+                scores[-score*docs.size() + j] = j;
         }
-        std::sort(scores.begin(), scores.end(),
-                         [](const std::tuple<int, int>& lhs, const std::tuple<int, int>&rhs)
-        {
-            if (std::get<0>(lhs) != std::get<0>(rhs))
-                return std::get<0>(lhs) > std::get<0>(rhs);
-            return std::get<1>(lhs) < std::get<1>(rhs);
-        });
 
         int counter = 0;
-        for (const auto& score: scores) {
+        for (const auto& index: scores){
             if (counter == 5)
                 break;
-            if (std::get<0>(score) > 0){
-                std::cout << std::get<1>(score)+1 << " ";
-                ++counter;
-            }
+            std::cout << index.second + 1 << " ";
+            ++counter;
         }
         std::cout << std::endl;
     }
