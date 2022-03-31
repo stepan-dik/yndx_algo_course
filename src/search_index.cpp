@@ -5,7 +5,7 @@
 #include <iterator>
 #include <unordered_map>
 #include <unordered_set>
-#include <map>
+#include <set>
 #include <tuple>
 #include <algorithm>
 
@@ -20,6 +20,16 @@ std::vector<std::string> get_split_string()
     return strings;
 }
 
+struct cmp {
+    bool operator()(const std::pair<int, int>& lhs, const std::pair<int, int>& rhs)
+    const
+    {
+        if (lhs.second != rhs.second)
+            return lhs.second > rhs.second;
+        return lhs.first < rhs.first;
+    }
+};
+
 int main()
 {
     int docs_num = 0;
@@ -29,18 +39,16 @@ int main()
     std::getline(std::cin, tmp);
     docs_num = std::stoi(tmp);
 
-    std::vector<std::unordered_map<std::string, int>> docs;
+    std::unordered_map<std::string, std::unordered_map<int, int>> dictionary;
 
     for (int i = 0; i < docs_num; ++i) {
         auto strings = get_split_string();
-        std::unordered_map<std::string, int> doc;
         for (const auto& string: strings) {
-            if (doc.find(string) == doc.end())
-                doc[string] = 1;
+            if (dictionary.find(string) == dictionary.end())
+                dictionary[string][i] = 1;
             else
-                doc[string]++;
+                ++dictionary[string][i];
         }
-        docs.push_back(doc);
     }
 
     tmp.clear();
@@ -52,23 +60,24 @@ int main()
         std::unordered_set<std::string> query_set;
         for (const auto& string: strings)
             query_set.insert(string);
-        std::map<int, int> scores;
-        for (int j = 0; j < docs.size(); ++j) {
-            int score = 0;
-            auto doc = docs.at(j);
-            for (const auto& string: query_set) {
-                if (doc.find(string) != doc.end())
-                    score += doc.at(string);
+        std::unordered_map<int, int> scores;
+        for (const auto& word: query_set){
+            for (const auto& doc_stats: dictionary[word]) {
+                if (scores.find(doc_stats.first) == scores.end())
+                    scores[doc_stats.first] = doc_stats.second;
+                else
+                    scores[doc_stats.first] += doc_stats.second;
             }
-            if (score > 0)
-                scores[-score*docs.size() + j] = j;
         }
 
+        std::set<std::pair<int, int>, cmp> sorted(scores.begin(), scores.end());
+
+
         int counter = 0;
-        for (const auto& index: scores){
+        for (const auto& index: sorted){
             if (counter == 5)
                 break;
-            std::cout << index.second + 1 << " ";
+            std::cout << index.first + 1 << " ";
             ++counter;
         }
         std::cout << std::endl;
