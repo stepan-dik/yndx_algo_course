@@ -84,11 +84,3 @@ int main()
     }
     return 0;
 }
-
-//    std::cout << "docs num " << docs_num << std::endl;
-//    for (const auto& doc: docs) {
-//        std::cout << "1doc ";
-//        for (const auto& word: doc)
-//            std::cout << word.first << " " << word.second << " ";
-//        std::cout << std::endl;
-//    }
