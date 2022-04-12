@@ -23,7 +23,7 @@
 статистики для n документов, содержащих искомые слова, и m уникальных
 слов запроса составит O(m+2n).
 
-Посылка 66612693
+Посылка 66763768
 */
 
 #include <iostream>
@@ -33,8 +33,6 @@
 #include <iterator>
 #include <unordered_map>
 #include <unordered_set>
-#include <set>
-#include <tuple>
 #include <algorithm>
 
 
@@ -49,7 +47,8 @@ std::vector<std::string> get_split_string()
 }
 
 struct cmp {
-    bool operator()(const std::pair<int, int>& lhs, const std::pair<int, int>& rhs)
+    bool operator()(const std::pair<int, int>& lhs,
+                    const std::pair<int, int>& rhs)
     const
     {
         if (lhs.second != rhs.second)
@@ -71,12 +70,8 @@ int main()
 
     for (int i = 0; i < docs_num; ++i) {
         auto strings = get_split_string();
-        for (const auto& string: strings) {
-            if (dictionary.find(string) == dictionary.end())
-                dictionary[string][i] = 1;
-            else
-                ++dictionary[string][i];
-        }
+        for (const auto& string: strings)
+            ++dictionary[string][i];
     }
 
     tmp.clear();
@@ -88,23 +83,25 @@ int main()
         std::unordered_set<std::string> query_set;
         for (const auto& string: strings)
             query_set.insert(string);
-        std::unordered_map<int, int> scores;
-        for (const auto& word: query_set){
+        std::vector<std::pair<int, int>> scores(docs_num, {0,0});
+        for (const auto& word: query_set) {
             for (const auto& [index, value]: dictionary[word]) {
-                if (scores.find(index) == scores.end())
-                    scores[index] = value;
-                else
-                    scores[index] += value;
+                scores[index].first = index;
+                scores[index].second += value;
             }
         }
 
-        std::set<std::pair<int, int>, cmp> sorted(scores.begin(), scores.end());
+        if (scores.size() > 5)
+            std::partial_sort(scores.begin(), scores.begin() + 5,
+                              scores.end(), cmp());
+        else
+            std::sort(scores.begin(), scores.end(), cmp{});
 
         int counter = 0;
-        for (const auto& index: sorted) {
-            if (counter == 5)
+        for (const auto& [index, value]: scores) {
+            if (counter == 5 || value == 0)
                 break;
-            std::cout << index.first + 1 << " ";
+            std::cout << index + 1 << " ";
             ++counter;
         }
         std::cout << std::endl;
