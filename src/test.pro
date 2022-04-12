@@ -33,7 +33,8 @@ SOURCES += \
     reverseOrder.cpp \
     search_index.cpp \
     sleight_of_hand.cpp \
-    stackmax.cpp
+    stackmax.cpp \
+    two_bin_search.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
