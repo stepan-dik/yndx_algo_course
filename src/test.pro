@@ -16,27 +16,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     algorithms.cpp \
-    bracket_gen.cpp \
-    bracket_sequence.cpp \
-    calculator_polish.cpp \
-    combinations.cpp \
+    bracket_gen/bracket_gen.cpp \
+    bracket_sequence/bracket_sequence.cpp \
+    calculator_polish/calculator_polish.cpp \
+    combinations/combinations.cpp \
+    cookies_and_kids.cpp \
     deck.cpp \
-    hashtable.cpp \
-    in_place_quicksort.cpp \
+    hashtable/hashtable.cpp \
+    in_place_quicksort/in_place_quicksort.cpp \
     limited_queue.cpp \
         main.cpp \
     refconnector.cpp \
     rpcmethod.cpp \
     reqtypes.cpp \
-    closest_zero.cpp \
-    deleteNode.cpp \
-    findElement.cpp \
-    printLinkedList.cpp \
-    reverseOrder.cpp \
-    search_index.cpp \
-    sleight_of_hand.cpp \
+    closest_zero/closest_zero.cpp \
+    deleteNode/deleteNode.cpp \
+    findElement/findElement.cpp \
+    printLinkedList/printLinkedList.cpp \
+    reverseOrder/reverseOrder.cpp \
+    search_index/search_index.cpp \
+    sleight_of_hand/sleight_of_hand.cpp \
     stackmax.cpp \
-    two_bin_search.cpp
+    subsequence/subsequence.cpp \
+    two_bin_search/two_bin_search.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
