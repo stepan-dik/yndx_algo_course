@@ -1,9 +1,10 @@
+/*
+    Find the first occurence of element greater than or equal to given in
+    vector if there is one
+*/
+
 #include <iostream>
 #include <vector>
-
-/*
-    Find closest bigger element in vector if there is one
-*/
 
 int closest_bigger(const std::vector<int>& vec, int target)
 {
