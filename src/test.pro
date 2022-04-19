@@ -39,6 +39,7 @@ SOURCES += \
     sleight_of_hand/sleight_of_hand.cpp \
     stackmax.cpp \
     subsequence/subsequence.cpp \
+    triangle_perimeter/triangle_perimeter.cpp \
     two_bin_search/two_bin_search.cpp
 
 # Default rules for deployment.
