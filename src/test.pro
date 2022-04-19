@@ -21,6 +21,7 @@ SOURCES += \
     calculator_polish/calculator_polish.cpp \
     combinations/combinations.cpp \
     cookies_and_kids.cpp \
+    count_sort/count_sort.cpp \
     count_values/count_values.cpp \
     deck.cpp \
     hashtable/hashtable.cpp \
