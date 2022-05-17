@@ -1,8 +1,8 @@
-#include "deck.h"
+#include "deque.h"
 #include <string>
 #include <iostream>
 
-bool Deck::push_back(int value)
+bool Deque::push_back(int value)
 {
     if (m_curSize == m_maxSize)
         return false;
@@ -20,7 +20,7 @@ bool Deck::push_back(int value)
     return true;
 }
 
-bool Deck::push_front(int value)
+bool Deque::push_front(int value)
 {
     if (m_curSize == m_maxSize)
         return false;
@@ -37,7 +37,7 @@ bool Deck::push_front(int value)
     return true;
 }
 
-std::optional<int> Deck::pop_back()
+std::optional<int> Deque::pop_back()
 {
     if (tail == nullptr)
         return {};
@@ -57,7 +57,7 @@ std::optional<int> Deck::pop_back()
     return result;
 }
 
-std::optional<int> Deck::pop_front()
+std::optional<int> Deque::pop_front()
 {
     if (tail == nullptr)
         return {};
@@ -83,7 +83,7 @@ int main()
     int maxDeckSize = 0;
     std::cin >> cmds;
     std::cin >> maxDeckSize;
-    Deck deck{maxDeckSize};
+    Deque deck{maxDeckSize};
     int arg;
 
     for (; cmds > 0; --cmds) {

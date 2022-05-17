@@ -3,10 +3,10 @@
 #include "nodes.h"
 #include <optional>
 
-class Deck
+class Deque
 {
 public:
-    Deck(int size)
+    Deque(int size)
         : m_maxSize(size)
     {
         nodes = new Node<int>[size];

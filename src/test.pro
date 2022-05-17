@@ -23,7 +23,7 @@ SOURCES += \
     cookies_and_kids.cpp \
     count_sort/count_sort.cpp \
     count_values/count_values.cpp \
-    deck.cpp \
+    deque.cpp \
     hashtable/hashtable.cpp \
     in_place_quicksort/in_place_quicksort.cpp \
     limited_queue.cpp \
@@ -50,7 +50,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     algorithms.h \
-    deck.h \
+    deque.h \
     limited_queue.h \
     macro.h \
     nodes.h \
