@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     algorithms.cpp \
+    big_num/big_num.cpp \
     bracket_gen/bracket_gen.cpp \
     bracket_sequence/bracket_sequence.cpp \
     calculator_polish/calculator_polish.cpp \
