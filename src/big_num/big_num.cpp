@@ -11,34 +11,31 @@ bool cmp(const std::string& left, const std::string& right)
     auto ls = left.size(), rs = right.size();
     auto lengths = std::minmax(ls, rs);
 
-//    auto left_c = left[0];
-//    auto right_c = right[0];
     bool result = false;
     size_t i = 0;
     for (; i < lengths.first; ++i) {
         if (left[i] != right[i]){
-//            std::cout << left[i] << " " << right[i] << "   ";
             return left[i] > right[i];
         }
-//        result = (left[i] < left.at(0) && left.length() != lengths.second) ||
-//                (left[i] > left.at(0) && left.length() == lengths.second);
     }
     auto longer_str = left.length() == lengths.second ? left : right;
+    auto shorter_char = longer_str[i-1];
     bool left_longer = left.length() == lengths.second;
     if (i >= lengths.first) {
         std::cout<< "shit " << left << " " << right << " " << i;
         while (i < longer_str.length()) {
-            result = (longer_str[i] < longer_str[0] && !left_longer) ||
-                    (longer_str[i] >= longer_str[0] && left_longer);
+            result = ((longer_str[i] < longer_str[0] ||
+                      (longer_str[i] == longer_str[0] && shorter_char > longer_str[0]))
+                    && !left_longer) ||
+                     ((longer_str[i] > longer_str[0] ||
+                      (longer_str[i] == longer_str[0] && shorter_char <= longer_str[0]))
+                    && left_longer);
             std::cout << " " << longer_str[i] << " " << longer_str[0] << " ";
-            if (longer_str[i] < longer_str[0]){
+            if (longer_str[i] < longer_str[0] || (longer_str[i] == longer_str[0] && shorter_char > longer_str[0])) {
                 std::cout << " brr ";
                 break;
             }
-            else {
-                std::cout << " aoa ";
-                ++i;
-            }
+            ++i;
         }
         std::cout << " res " << result << " | final i " << i << " | Left longer " << left_longer << std::endl;
     }
