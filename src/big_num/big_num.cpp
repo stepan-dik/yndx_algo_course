@@ -1,11 +1,15 @@
+
+// find biggest possible number concatenating given numbers
+
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
 
+// efficient solution
 bool cmp(const std::string& left, const std::string& right)
 {
-//    std::cout << "compare " << left << " and " << right << std::endl;
     if (right == left)
         return false;
     auto ls = left.size(), rs = right.size();
@@ -19,39 +23,53 @@ bool cmp(const std::string& left, const std::string& right)
         }
     }
     auto longer_str = left.length() == lengths.second ? left : right;
-    auto shorter_char = longer_str[i-1];
     bool left_longer = left.length() == lengths.second;
     if (i >= lengths.first) {
-        std::cout<< "shit " << left << " " << right << " " << i;
-        while (i < longer_str.length()) {
-            result = ((longer_str[i] < longer_str[0] ||
-                      (longer_str[i] == longer_str[0] && shorter_char > longer_str[0]))
-                    && !left_longer) ||
-                     ((longer_str[i] > longer_str[0] ||
-                      (longer_str[i] == longer_str[0] && shorter_char <= longer_str[0]))
-                    && left_longer);
-            std::cout << " " << longer_str[i] << " " << longer_str[0] << " ";
-            if (longer_str[i] < longer_str[0] || (longer_str[i] == longer_str[0] && shorter_char > longer_str[0])) {
-                std::cout << " brr ";
+        bool res_set = false;
+        for (;i < longer_str.length(); ++i) {
+            if (longer_str[i] == longer_str[i - lengths.first])
+                continue;
+            result = (longer_str[i] > longer_str[i - lengths.first] && left_longer) ||
+                     (longer_str[i] < longer_str[i - lengths.first] && !left_longer);
+            res_set = true;
+            break;
+        }
+        if (!res_set) {
+            for (size_t j = 0; j < lengths.first; ++j) {
+                if (longer_str[j] == longer_str[longer_str.length() - lengths.first])
+                    continue;
+                result = (longer_str[longer_str.length() - lengths.first] < longer_str[j] && left_longer) ||
+                        (longer_str[longer_str.length() - lengths.first] > longer_str[j] && !left_longer);
                 break;
             }
-            ++i;
         }
-        std::cout << " res " << result << " | final i " << i << " | Left longer " << left_longer << std::endl;
     }
 
     return result;
 }
 
+// simple solution
+bool cmp2(const std::string& left, const std::string& right)
+{
+    std::string l(left + right);
+    std::string r(right + left);
+    return l > r;
+}
+
 std::string biggest_num(std::vector<std::string> vec)
 {
+    auto start = std::chrono::high_resolution_clock::now();
     std::sort(vec.begin(), vec.end(), cmp);
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
     std::string res;
     for(const auto& i: vec) {
         std::cout << i << " ";
         res.append(i);
     }
     std::cout << std::endl;
+    std::cout << "Duration " << duration.count() << " microseconds" << std::endl;
     return res;
 }
 
@@ -74,18 +92,18 @@ int main()
         auto res = biggest_num(vec);
         bool passed = expected == res;
         if (passed) {
-            std::cout << "true" << std::endl;
+            std::cout << "Correct" << std::endl;
             continue;
         }
-        std::cout << "false" << std::endl;
-        int wsym = 0;
+        std::cout << "Incorrect" << std::endl;
+        size_t wsym = 0;
         for(;wsym < expected.length(); ++wsym) {
             std::cout << expected[wsym];
             if (res[wsym] != expected[wsym])
                 break;
         }
         std::cout << std::endl;
-        for (int j = 0; j < wsym; ++j)
+        for (size_t j = 0; j < wsym; ++j)
             std::cout << " ";
         std::cout << "^" << std::endl;
 
