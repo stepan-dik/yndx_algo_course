@@ -19,6 +19,7 @@ SOURCES += \
     big_num/big_num.cpp \
     bracket_gen/bracket_gen.cpp \
     bracket_sequence/bracket_sequence.cpp \
+    bubble_sort/bubble_sort.cpp \
     calculator_polish/calculator_polish.cpp \
     combinations/combinations.cpp \
     conferencers/conferencers.cpp \
