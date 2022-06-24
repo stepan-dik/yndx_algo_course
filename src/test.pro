@@ -21,6 +21,7 @@ SOURCES += \
     bracket_sequence/bracket_sequence.cpp \
     calculator_polish/calculator_polish.cpp \
     combinations/combinations.cpp \
+    conferencers/conferencers.cpp \
     cookies_and_kids.cpp \
     count_sort/count_sort.cpp \
     count_values/count_values.cpp \
