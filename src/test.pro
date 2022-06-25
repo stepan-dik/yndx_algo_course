@@ -31,6 +31,7 @@ SOURCES += \
     in_place_quicksort/in_place_quicksort.cpp \
     limited_queue.cpp \
         main.cpp \
+    merge_sort/merge_sort.cpp \
     print_range/print_range.cpp \
     refconnector.cpp \
     rpcmethod.cpp \
