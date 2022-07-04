@@ -42,6 +42,7 @@ SOURCES += \
     closest_zero/closest_zero.cpp \
     deleteNode/deleteNode.cpp \
     findElement/findElement.cpp \
+    poly_hash/poly_hash.cpp \
     printLinkedList/printLinkedList.cpp \
     reverseOrder/reverseOrder.cpp \
     search_index/search_index.cpp \
