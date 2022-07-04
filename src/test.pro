@@ -47,6 +47,7 @@ SOURCES += \
     search_index/search_index.cpp \
     sleight_of_hand/sleight_of_hand.cpp \
     stackmax.cpp \
+    strange_cmp/strange_cmp.cpp \
     subsequence/subsequence.cpp \
     triangle_perimeter/triangle_perimeter.cpp \
     two_bin_search/two_bin_search.cpp
