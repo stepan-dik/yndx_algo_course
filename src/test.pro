@@ -23,6 +23,7 @@ SOURCES += \
     bubble_sort/bubble_sort.cpp \
     calculator_polish/calculator_polish.cpp \
     combinations/combinations.cpp \
+    competition/competition.cpp \
     conferencers/conferencers.cpp \
     cookies_and_kids.cpp \
     count_sort/count_sort.cpp \
