@@ -1,37 +1,36 @@
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <cmath>
 
-long pow(long base, long to, long mod)
+long int pow(long int base, int to, long int mod)
 {
-//    std::cout << base << " " << to << " " << mod << " ";
-    long res = 1;
-    for (;to-->0;) {
-        res = std::div(res * base, mod).rem;
+    if (to == 0)
+        return 1;
+    else if (to == 1)
+        return base;
+
+    long int result = 1;
+
+    while(to > 0) {
+        if (to %2 !=0)
+            result = std::div(result * base, mod).rem;
+        base = std::div(base*base, mod).rem;
+        to >>= 1;
     }
-    std::cout << res << " | ";
-    return res;
+
+    return result;
 }
 
 long calc_hash(std::string s, long base, long mod)
 {
-    long hash = 0;
-    int ctr = 0;
-    for (auto i = s.rbegin(); i < s.rend(); ++i, ++ctr) {
-//        std::cout << (std::div(std::pow(base, ctr), mod).rem) << " ";
-//        long long tmp =
-//                hash +
-//                std::div(
-//                    std::div(*i, mod).rem *
-//                    std::div(std::pow(base, ctr), mod).rem,
-
-//                    mod
-//                    ).rem;
-////        std::cout << tmp << " ";
-//        auto rem = std::div(tmp, static_cast<long long>(mod)).rem;
-        auto poww = (std::div(static_cast<long>(*i), mod).rem * pow(base, ctr, mod));
-        auto tmp = hash + poww;
+    long int hash = 0;
+    long prev_pov = 1;
+    for (auto i = s.rbegin(); i < s.rend(); ++i) {
+        auto poww = std::div(static_cast<long int>(*i) * prev_pov, mod).rem;
+        auto tmp = std::div(hash, mod).rem + std::div(poww, mod).rem;
         auto rem = std::div(tmp, mod).rem;
+        prev_pov = std::div(prev_pov * base, mod).rem;
         hash = rem < 0 ? rem + mod : rem;
     }
 
@@ -49,7 +48,12 @@ int main()
         std::cin >> base >> mod;
 
         std::cin >> s;
-        std::cout << calc_hash(s, base, mod) << std::endl;
+        auto start = std::chrono::high_resolution_clock::now();
+        auto res = calc_hash(s, base, mod);
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        std::cout << res << " " << (res <= mod) << " " << duration.count() << "mcs" << std::endl;
     }
 
     return 0;
