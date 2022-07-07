@@ -15,43 +15,43 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    activities/activities.cpp \
-    algorithms.cpp \
-    big_num/big_num.cpp \
-    bracket_gen/bracket_gen.cpp \
-    bracket_sequence/bracket_sequence.cpp \
-    bubble_sort/bubble_sort.cpp \
-    calculator_polish/calculator_polish.cpp \
-    combinations/combinations.cpp \
-    competition/competition.cpp \
-    conferencers/conferencers.cpp \
-    cookies_and_kids.cpp \
-    count_sort/count_sort.cpp \
-    count_values/count_values.cpp \
-    deque.cpp \
-    hashtable/hashtable.cpp \
-    in_place_quicksort/in_place_quicksort.cpp \
-    limited_queue.cpp \
-        main.cpp \
-    median/median.cpp \
-    merge_sort/merge_sort.cpp \
-    print_range/print_range.cpp \
-    refconnector.cpp \
-    rpcmethod.cpp \
-    reqtypes.cpp \
-    closest_zero/closest_zero.cpp \
-    deleteNode/deleteNode.cpp \
-    findElement/findElement.cpp \
-    poly_hash/poly_hash.cpp \
-    printLinkedList/printLinkedList.cpp \
-    reverseOrder/reverseOrder.cpp \
-    search_index/search_index.cpp \
-    sleight_of_hand/sleight_of_hand.cpp \
-    stackmax.cpp \
-    strange_cmp/strange_cmp.cpp \
-    subsequence/subsequence.cpp \
-    triangle_perimeter/triangle_perimeter.cpp \
-    two_bin_search/two_bin_search.cpp
+    main.cpp \
+    sprint_1/algorithms.cpp \
+    sprint_1/closest_zero/closest_zero.cpp \
+    sprint_1/sleight_of_hand/sleight_of_hand.cpp \
+    sprint_2/bracket_sequence/bracket_sequence.cpp \
+    sprint_2/calculator_polish/calculator_polish.cpp \
+    sprint_2/deleteNode/deleteNode.cpp \
+    sprint_2/deque.cpp \
+    sprint_2/findElement/findElement.cpp \
+    sprint_2/limited_queue.cpp \
+    sprint_2/printLinkedList/printLinkedList.cpp \
+    sprint_2/reverseOrder/reverseOrder.cpp \
+    sprint_2/stackmax.cpp \
+    sprint_3/big_num/big_num.cpp \
+    sprint_3/bracket_gen/bracket_gen.cpp \
+    sprint_3/bubble_sort/bubble_sort.cpp \
+    sprint_3/combinations/combinations.cpp \
+    sprint_3/conferencers/conferencers.cpp \
+    sprint_3/cookies_and_kids.cpp \
+    sprint_3/count_sort/count_sort.cpp \
+    sprint_3/count_values/count_values.cpp \
+    sprint_3/in_place_quicksort/in_place_quicksort.cpp \
+    sprint_3/median/median.cpp \
+    sprint_3/merge_sort/merge_sort.cpp \
+    sprint_3/subsequence/subsequence.cpp \
+    sprint_3/triangle_perimeter/triangle_perimeter.cpp \
+    sprint_3/two_bin_search/two_bin_search.cpp \
+    sprint_4/activities/activities.cpp \
+    sprint_4/competition/competition.cpp \
+    sprint_4/hashtable/hashtable.cpp \
+    sprint_4/poly_hash/poly_hash.cpp \
+    sprint_4/search_index/search_index.cpp \
+    sprint_4/strange_cmp/strange_cmp.cpp \
+    sprint_5/print_range/print_range.cpp \
+    work/refconnector.cpp \
+    work/rpcmethod.cpp \
+    work/reqtypes.cpp \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -59,16 +59,16 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    algorithms.h \
-    deque.h \
-    limited_queue.h \
-    macro.h \
+    sprint_1/algorithms.h \
+    sprint_2/deque.h \
+    sprint_2/limited_queue.h \
+    sprint_2/stack.h \
+    sprint_2/stackmax.h \
+    work/macro.h \
     nodes.h \
     objects.h \
     solution.h \
-    stack.h \
-    stackmax.h \
     study.h \
-    refconnector.h \
-    rpcmethod.h \
-    reqtypes.h
+    work/refconnector.h \
+    work/rpcmethod.h \
+    work/reqtypes.h
