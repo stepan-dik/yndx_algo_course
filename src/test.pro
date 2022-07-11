@@ -46,6 +46,7 @@ SOURCES += \
     sprint_4/competition/competition.cpp \
     sprint_4/hashtable/hashtable.cpp \
     sprint_4/poly_hash/poly_hash.cpp \
+    sprint_4/prefix_hashes/prefix_hashes.cpp \
     sprint_4/search_index/search_index.cpp \
     sprint_4/strange_cmp/strange_cmp.cpp \
     sprint_5/print_range/print_range.cpp \
