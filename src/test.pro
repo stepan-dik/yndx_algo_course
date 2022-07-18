@@ -43,6 +43,7 @@ SOURCES += \
     sprint_3/triangle_perimeter/triangle_perimeter.cpp \
     sprint_3/two_bin_search/two_bin_search.cpp \
     sprint_4/activities/activities.cpp \
+    sprint_4/anagrams/anagrams.cpp\
     sprint_4/break_me/break_me.cpp \
     sprint_4/competition/competition.cpp \
     sprint_4/hashtable/hashtable.cpp \
