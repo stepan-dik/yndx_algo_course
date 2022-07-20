@@ -55,12 +55,12 @@ int main()
     Node node6_1{.left = nullptr, .right = nullptr, .value=6};      /*                ___________14  */
     Node node9{.left = nullptr, .right = nullptr, .value=9};        /*               /               */
     Node node11{.left = nullptr, .right = nullptr, .value=11};      /*         ___ 8 ___             */
-    Node node13{.left = nullptr, .right = nullptr, .value=13};      /*        /          \           */
-    Node node2{.left = &node1, .right = &node3, .value=2};          /*     _4 _          _10_        */
-    Node node5{.left = nullptr, .right = &node6, .value=5};         /*    /    \        /    \       */
-    Node node7{.left = &node6_1, .right = nullptr, .value=7};       /*   2      6      9     12      */
-    Node node12{.left = &node11, .right = &node13, .value=12};      /*  / \    / \          /  \     */
-    Node node6_2{.left = &node5, .right = &node7, .value=6};        /* 1   3  5   7        11  13    */
+    Node node13{.left = nullptr, .right = nullptr, .value=13};      /*        /         \            */
+    Node node2{.left = &node1, .right = &node3, .value=2};          /*     _4 _         _10_         */
+    Node node5{.left = nullptr, .right = &node6, .value=5};         /*    /    \       /    \        */
+    Node node7{.left = &node6_1, .right = nullptr, .value=7};       /*   2      6     9     12       */
+    Node node12{.left = &node11, .right = &node13, .value=12};      /*  / \    / \         /  \      */
+    Node node6_2{.left = &node5, .right = &node7, .value=6};        /* 1   3  5   7       11  13     */
     Node node10{.left = &node9, .right = &node12, .value=10};       /*        \  /                   */
     Node node4{.left = &node2, .right = &node6_2, .value=4};        /*         6 6                   */
     Node node8{.left = &node4, .right = &node10, .value=8};

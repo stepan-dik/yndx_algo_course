@@ -99,7 +99,7 @@ int main()
     Node node9{.left = nullptr, .right = nullptr, .value=9};        /*               /               */
     Node node11{.left = nullptr, .right = nullptr, .value=11};      /*         ___ 8 ___             */
     Node node13{.left = nullptr, .right = nullptr, .value=13};      /*        /          \           */
-    Node node2{.left = &node1, .right = &node3, .value=2};          /*      4 _          _10_        */
+    Node node2{.left = &node1, .right = &node3, .value=2};          /*     _4 _          _10_        */
     Node node5{.left = nullptr, .right = &node6, .value=5};         /*    /    \        /    \       */
     Node node7{.left = &node6_1, .right = nullptr, .value=7};       /*   2      6      9     12      */
     Node node12{.left = &node11, .right = &node13, .value=12};      /*  / \    / \          /  \     */
