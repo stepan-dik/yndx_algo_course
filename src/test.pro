@@ -52,6 +52,7 @@ SOURCES += \
     sprint_4/search_index/search_index.cpp \
     sprint_4/strange_cmp/strange_cmp.cpp \
     sprint_4/substrings/substrings.cpp \
+    sprint_5/add_node/add_node.cpp \
     sprint_5/print_range/print_range.cpp \
     sprint_5/search_tree/search_tree.cpp \
     work/refconnector.cpp \
