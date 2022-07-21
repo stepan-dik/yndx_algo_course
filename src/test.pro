@@ -54,6 +54,7 @@ SOURCES += \
     sprint_4/substrings/substrings.cpp \
     sprint_5/add_node/add_node.cpp \
     sprint_5/print_range/print_range.cpp \
+    sprint_5/remove_node/remove_node.cpp \
     sprint_5/search_tree/search_tree.cpp \
     work/refconnector.cpp \
     work/rpcmethod.cpp \
