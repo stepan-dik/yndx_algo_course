@@ -1,5 +1,6 @@
 #include <stack>
 #include <iostream>
+#include <cassert>
 
 // do not declare Node in your submit-file
 struct Node {
@@ -22,7 +23,7 @@ void print_LMR(Node* node)
             node = node->left;
             continue;
         }
-        std::cout << node->value << " ";
+        std::cout << node->value << " " << std::flush;
         if (node->right != nullptr) {
             node = node->right;
             just_popped = false;
@@ -36,10 +37,21 @@ void print_LMR(Node* node)
     }
 }
 
+void print_forward(Node* root)
+{
+    if (root == nullptr)
+        return;
+    std::cout << root->value << " ";
+    print_forward(root->left);
+    print_forward(root->right);
+}
+
 Node* find_parent(Node* node, int key)
 {
     while (true) {
-        if (key < node->value) {
+        if (node->value == key)
+            return node;
+        else if (key < node->value) {
             if (node->left == nullptr)
                 return nullptr;
             if (node->left->value != key)
@@ -60,17 +72,6 @@ Node* find_parent(Node* node, int key)
 
 void replace_node(Node* parent, int key, Node* child = nullptr)
 {
-    if (child != nullptr) {
-        if (key < parent->value) {
-            child->left = parent->left->left;
-            child->right = parent->left->right;
-        }
-        else {
-            child->left = parent->right->left;
-            child->right = parent->right->right;
-        }
-    }
-
     if (key < parent->value)
         parent->left = child;
     else
@@ -79,12 +80,22 @@ void replace_node(Node* parent, int key, Node* child = nullptr)
 
 Node* remove(Node* root, int key)
 {
-    auto parent = find_parent(root, key);
-    if (parent == nullptr)
+    if (root == nullptr)
         return root;
+    Node* parent = nullptr;
+    if (key != root->value) {
+        parent = find_parent(root, key);
+        if (parent == nullptr)
+            return root;
+    }
 
-    auto to_remove = key < parent->value ? parent->left : parent->right;
+    Node* to_remove = root;
+    if (parent != nullptr)
+        to_remove = key < parent->value ? parent->left : parent->right;
+
     if (to_remove->left == nullptr && to_remove->right == nullptr) {
+        if (to_remove == root)
+            return nullptr;
         replace_node(parent, key);
         return root;
     }
@@ -92,22 +103,56 @@ Node* remove(Node* root, int key)
         auto child = to_remove->left == nullptr ?
                                                 to_remove->right :
                                                 to_remove->left;
+        if (to_remove == root)
+            return child;
         replace_node(parent, key, child);
         return root;
     }
     else {
-        auto trav_node = to_remove->left;
-        if (trav_node->right == nullptr) {
-            replace_node(to_remove, trav_node->value, trav_node);
+        auto parent_of_new = to_remove->left;
+        if (parent_of_new->right == nullptr) {
+            parent_of_new->right = to_remove->right;
+            if (to_remove == root)
+                return parent_of_new;
+            replace_node(parent, key, parent_of_new);
             return root;
         }
-        while (trav_node->right->right != nullptr)
-            trav_node = trav_node->right;
-        replace_node(trav_node, trav_node->right->value, trav_node->right->left);
-        replace_node(parent, key, trav_node->right);
+        while (parent_of_new->right->right != nullptr)
+            parent_of_new = parent_of_new->right;
+        auto child = parent_of_new->right;
+        parent_of_new->right = child->left;
+
+        if (to_remove == root) {
+            child->left = root->left;
+            child->right = root->right;
+            return child;
+        }
+        else if (key < parent->value) {
+            child->left = parent->left->left;
+            child->right = parent->left->right;
+        }
+        else {
+            child->left = parent->right->left;
+            child->right = parent->right->right;
+        }
+        replace_node(parent, key, child);
     }
 
     return root;
+}
+
+void test() {
+    Node node1({nullptr, nullptr, 2});
+    Node node2({&node1, nullptr, 3});
+    Node node3({nullptr, &node2, 1});
+    Node node4({nullptr, nullptr, 6});
+    Node node5({&node4, nullptr, 8});
+    Node node6({&node5, nullptr, 10});
+    Node node7({&node3, &node6, 5});
+    Node* newHead = remove(&node7, 10);
+    assert(newHead->value == 5);
+    assert(newHead->right == &node5);
+    assert(newHead->right->value == 8);
 }
 
 int main()
@@ -130,8 +175,17 @@ int main()
     Node node14{.left = &node8, .right = nullptr, .value=14};
 
 //    auto p = find_parent(&node14, 10);
-    remove(&node14, 6);
     print_LMR(&node14);
+    std::cout << std::endl;
+    print_forward(&node14);
+    std::cout << std::endl;
+    auto new_node = remove(&node14, 14);
+    new_node = remove(new_node, 8);
+    print_LMR(new_node);
+    std::cout << std::endl;
+    print_forward(new_node);
+    std::cout << std::endl;
+    test();
 
     return 0;
 }
