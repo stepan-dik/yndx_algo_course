@@ -11,32 +11,32 @@ struct Node {
 #include <cmath>
 #include <algorithm>
 
-int height(const Node* node)
-{
-    if (node == nullptr)
-        return 0;
 
-    int left = height(node->left);
-    int right = height(node->right);
-
-    return 1 + std::max(left, right);
-}
-
-bool is_balanced(const Node* node)
+bool is_balanced(const Node* node, int* m_height)
 {
 
-    if (node == nullptr)
+    if (node == nullptr) {
+        *m_height = 0;
         return true;
-
-    if (is_balanced(node->left) && is_balanced(node->right)) {
-        return std::abs(height(node->left) - height(node->right)) <= 1;
     }
+
+    bool l_balanced = false, r_balanced = false;
+    int l_height = 0, r_height = 0;
+
+    l_balanced = is_balanced(node->left, &l_height);
+    r_balanced = is_balanced(node->right, &r_height);
+
+    *m_height = std::max(l_height, r_height);
+
+    if (std::abs(l_height - r_height) <= 1)
+        return l_balanced && r_balanced;
 
     return false;
 }
 
 bool Solution(const Node* root) {
-    return is_balanced(root);
+    int height = 0;
+    return is_balanced(root, &height);
 }
 
 void test() {
@@ -67,7 +67,7 @@ int main()
     Node node8  {  .value=8 , .left = &node4, .right = &node10  };
     Node node14 {  .value=14, .left = &node8, .right = nullptr  };
 
-    std::cout << is_balanced(&node8);
+    std::cout << Solution(&node8);
     std::cout << std::endl;
 
     return 0;
