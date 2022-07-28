@@ -58,6 +58,7 @@ SOURCES += \
     sprint_5/remove_node/remove_node.cpp \
     sprint_5/search_tree/search_tree.cpp \
     sprint_5/sift_down/sift_down.cpp \
+    sprint_5/sift_up/sift_up.cpp \
     work/refconnector.cpp \
     work/rpcmethod.cpp \
     work/reqtypes.cpp \
