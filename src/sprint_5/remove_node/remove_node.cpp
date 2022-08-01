@@ -72,26 +72,18 @@ void print_forward(Node* root)
 
 Node* find_parent(Node* node, int key)
 {
-    while (true) {
+    Node* parent = nullptr;
+    while (node != nullptr) {
         if (node->value == key)
-            return node;
-        else if (key < node->value) {
-            if (node->left == nullptr)
-                return nullptr;
-            if (node->left->value != key)
-                node = node->left;
-            else
-                return node;
-        }
-        else {
-            if (node->right == nullptr)
-                return nullptr;
-            if (node->right->value != key)
-                node = node->right;
-            else
-                return node;
-        }
+            return parent;
+
+        parent = node;
+        if (key < node->value)
+            node = node->left;
+        else if (key > node->value)
+            node = node->right;
     }
+    return nullptr;
 }
 
 Node* new_root(Node* root, Node* parent, int key, Node* child = nullptr)
