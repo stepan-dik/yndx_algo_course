@@ -14,7 +14,7 @@
  *
  *              --- ВРЕМЕННАЯ СЛОЖНОСТЬ ---
  *   Сложность поиска удаляемого узла O(log(n)), для худшего случая, когда
- * дерево представляет собой связный список O(n), такие же порядки сложности
+ * дерево представляет собой связный список, O(n), такие же порядки сложности
  * для поиска заменяющего узла. O(1) для непосредственно замены ссылок.
  *
  *              --- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ ---
@@ -94,18 +94,22 @@ Node* find_parent(Node* node, int key)
     }
 }
 
-void replace_node(Node* parent, int key, Node* child = nullptr)
+Node* new_root(Node* root, Node* parent, int key, Node* child = nullptr)
 {
+    if (parent == nullptr)
+        return child;
+
     if (key < parent->value)
         parent->left = child;
     else
         parent->right = child;
+    return root;
 }
 
-Node* remove(Node* root, int key)
+Node* remove_iterative(Node* root, int key)
 {
     if (root == nullptr)
-        return root;
+        return nullptr;
     Node* parent = nullptr;
     if (key != root->value) {
         parent = find_parent(root, key);
@@ -118,50 +122,64 @@ Node* remove(Node* root, int key)
         to_remove = key < parent->value ? parent->left : parent->right;
 
     if (to_remove->left == nullptr && to_remove->right == nullptr) {
-        if (to_remove == root)
-            return nullptr;
-        replace_node(parent, key);
-        return root;
+        return new_root(root, parent, key);
     }
-    else if (to_remove->left == nullptr || to_remove->right == nullptr){
+    else if (to_remove->left == nullptr || to_remove->right == nullptr) {
         auto child = to_remove->left == nullptr ?
                                                 to_remove->right :
                                                 to_remove->left;
-        if (to_remove == root)
-            return child;
-        replace_node(parent, key, child);
-        return root;
+        return new_root(root, parent, key, child);
     }
     else {
-        auto parent_of_new = to_remove->left;
-        if (parent_of_new->right == nullptr) {
-            parent_of_new->right = to_remove->right;
-            if (to_remove == root)
-                return parent_of_new;
-            replace_node(parent, key, parent_of_new);
-            return root;
-        }
-        while (parent_of_new->right->right != nullptr)
-            parent_of_new = parent_of_new->right;
-        auto child = parent_of_new->right;
-        parent_of_new->right = child->left;
+        auto replacer = to_remove->left;
+        Node* prev = nullptr;
 
-        if (to_remove == root) {
-            child->left = root->left;
-            child->right = root->right;
+        while (replacer->right != nullptr) {
+            prev = replacer;
+            replacer = replacer->right;
+        }
+
+        if (prev != nullptr) {
+            prev->right = replacer->left;
+            replacer->left = to_remove->left;
+        }
+        replacer->right = to_remove->right;
+
+        return new_root(root, parent, key, replacer);
+    }
+}
+
+Node* remove(Node* root, int key)
+{
+    if (root == nullptr)
+        return root;
+    else if (key < root->value)
+        root->left = remove(root->left, key);
+    else if (key > root->value)
+        root->right = remove(root->right, key);
+    else {
+        if (root->left == nullptr && root->right == nullptr)
+            return nullptr;
+        else if (root->left == nullptr || root->right == nullptr) {
+            auto child = root->left == nullptr ? root->right : root->left;
             return child;
         }
-        else if (key < parent->value) {
-            child->left = parent->left->left;
-            child->right = parent->left->right;
-        }
         else {
-            child->left = parent->right->left;
-            child->right = parent->right->right;
-        }
-        replace_node(parent, key, child);
-    }
+            auto replacer = root->left;
+            Node* prev = nullptr;
+            while (replacer->right != nullptr) {
+                prev = replacer;
+                replacer = replacer->right;
+            }
 
+            if (prev != nullptr) {
+                prev->right = replacer->left;
+                replacer->left = root->left;
+            }
+            replacer->right = root->right;
+            return replacer;
+        }
+    }
     return root;
 }
 
@@ -199,14 +217,14 @@ int main()
     Node node14{.left = &node8, .right = nullptr, .value=14};
 
 //    auto p = find_parent(&node14, 10);
-    print_LMR(&node14);
+//    print_LMR(&node14);
     std::cout << std::endl;
     print_forward(&node14);
     std::cout << std::endl;
-    auto new_node = remove(&node14, 14);
-    new_node = remove(new_node, 8);
-    print_LMR(new_node);
-    std::cout << std::endl;
+    auto new_node = remove_iterative(&node14, 8);
+//    new_node = remove(new_node, 8);
+//    print_LMR(new_node);
+//    std::cout << std::endl;
     print_forward(new_node);
     std::cout << std::endl;
     test();
