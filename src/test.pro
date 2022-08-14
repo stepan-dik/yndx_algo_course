@@ -54,6 +54,7 @@ SOURCES += \
     sprint_4/substrings/substrings.cpp \
     sprint_5/add_node/add_node.cpp \
     sprint_5/balanced_tree/balanced_tree.cpp \
+    sprint_5/different_search_trees/different_search_trees.cpp \
     sprint_5/print_range/print_range.cpp \
     sprint_5/pyramid_sort/pyramid_sort.cpp \
     sprint_5/remove_node/remove_node.cpp \
