@@ -1,3 +1,5 @@
+// Calculate polynomial hash
+
 #include <chrono>
 #include <iostream>
 #include <string>

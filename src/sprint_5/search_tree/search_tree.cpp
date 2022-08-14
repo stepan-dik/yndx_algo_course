@@ -1,3 +1,5 @@
+// Check if tree is a valid search tree
+
 //#include "solution_tree.h"
 
 #include <stack>

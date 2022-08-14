@@ -1,3 +1,5 @@
+// Create an adjacency list from the given edge list
+
 #include <iostream>
 #include <map>
 #include <vector>

@@ -1,3 +1,5 @@
+// Check if tree is balanced
+
 #include <iostream>
 
 struct Node {
@@ -10,7 +12,6 @@ struct Node {
 #include <cassert>
 #include <cmath>
 #include <algorithm>
-
 
 bool is_balanced(const Node* node, int* m_height)
 {
