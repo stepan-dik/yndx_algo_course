@@ -64,6 +64,7 @@ SOURCES += \
     sprint_5/sift_up/sift_up.cpp \
     sprint_6/adjacency_list/adjacency_list.cpp \
     sprint_6/BFS/BFS.cpp \
+    sprint_6/connected_components/connected_components.cpp \
     sprint_6/DFS/DFS.cpp \
     sprint_6/edge_list_to_matrix/edge_list_to_matrix.cpp \
     work/refconnector.cpp \
