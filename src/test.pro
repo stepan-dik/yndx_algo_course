@@ -67,6 +67,7 @@ SOURCES += \
     sprint_6/connected_components/connected_components.cpp \
     sprint_6/DFS/DFS.cpp \
     sprint_6/edge_list_to_matrix/edge_list_to_matrix.cpp \
+    sprint_6/railroads/railroads.cpp \
     work/refconnector.cpp \
     work/rpcmethod.cpp \
     work/reqtypes.cpp \
