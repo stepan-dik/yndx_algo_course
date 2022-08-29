@@ -66,6 +66,7 @@ SOURCES += \
     sprint_6/BFS/BFS.cpp \
     sprint_6/connected_components/connected_components.cpp \
     sprint_6/DFS/DFS.cpp \
+    sprint_6/distance_between_v/distance_between_v.cpp \
     sprint_6/edge_list_to_matrix/edge_list_to_matrix.cpp \
     sprint_6/railroads/railroads.cpp \
     work/refconnector.cpp \
