@@ -12,7 +12,9 @@
  *   В худшем случае алгоритм обходит все вершины рекурсивно, по 2
  * раза (вход и выход из рекурсии), и еще раз при поиске
  * непроверенных компонент связности графа, то есть O(V), где V
- * количество вершин.
+ * количество вершин. Также при посещении каждой вершины проверяются
+ * все, исходящие из неё рёбра, каждое ребро графа посещается 1 раз,
+ * что добавляет ко временной сложности O(E), итого O(V+E).
  *
  *          --- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ ---
  *   Хранение списка смежности O(E), хранение цветов вершин
@@ -37,12 +39,11 @@ enum Color {
 };
 
 bool DFS_recursive(int vertex,
-         std::unordered_map<int, std::vector<int>>& adj_list,
+         std::vector<std::vector<int>>& adj_list,
          std::vector<Color>& colors)
 {
     colors[vertex] = Color::Gray;
     auto& children = adj_list[vertex];
-    std::sort(children.begin(), children.end());
     auto res = true;
     for (auto v: children) {
         if (!res)
@@ -62,7 +63,7 @@ int main()
 {
     unsigned int v = 0;
     std::cin >> v;
-    std::unordered_map<int, std::vector<int>> adj_list;
+    std::vector<std::vector<int>> adj_list(v+1);
 
     for (unsigned int i = 0; i < v; ++i) {
         std::string row;
@@ -80,7 +81,8 @@ int main()
     bool acyclic = true;
     for (auto it = std::begin(colors);
          it != std::end(colors);
-         it = std::find_if(it, end(colors), [](Color a){return a == White;}))
+         it = std::find_if(it, end(colors),
+                           [](Color a){return a == White;}))
     {
         int root = std::distance(std::begin(colors), it);
         if (!DFS_recursive(root, adj_list, colors)) {
