@@ -69,6 +69,7 @@ SOURCES += \
     sprint_6/distance_between_v/distance_between_v.cpp \
     sprint_6/edge_list_to_matrix/edge_list_to_matrix.cpp \
     sprint_6/expensive_network/expensive_network.cpp \
+    sprint_6/max_distance/max_distance.cpp \
     sprint_6/railroads/railroads.cpp \
     work/refconnector.cpp \
     work/rpcmethod.cpp \
