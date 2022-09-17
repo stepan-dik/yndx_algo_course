@@ -71,6 +71,7 @@ SOURCES += \
     sprint_6/expensive_network/expensive_network.cpp \
     sprint_6/max_distance/max_distance.cpp \
     sprint_6/railroads/railroads.cpp \
+    sprint_8/cheat_sheet/cheat_sheet.cpp \
     work/refconnector.cpp \
     work/rpcmethod.cpp \
     work/reqtypes.cpp \
