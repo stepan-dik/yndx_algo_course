@@ -13,7 +13,7 @@
  * Множество посещенных индексов в свою очередь очищается от индексов,
  * в которые из оставшихся стартовых попасть не получится.
  *   Новые стартовые позиции извлекаются, пока список не опустеет,
- * либо пока не найдётся позиция, в которй завершаются и проверяемый
+ * либо пока не найдётся позиция, в которой завершаются и проверяемый
  * текст, и какой-то из шаблонов.
  *
  *              --- ВРЕМЕННАЯ СЛОЖНОСТЬ ---
@@ -38,10 +38,9 @@
 
 #include <iostream>
 #include <string>
-#include <deque>
 #include <vector>
 #include <unordered_map>
-#include <set>
+#include <algorithm>
 
 void add_word(
         std::vector<std::unordered_map<char, int>>& trie,
@@ -74,32 +73,30 @@ bool check_text(const std::string& text,
                 const std::vector<std::unordered_map<char, int>>& trie)
 {
     bool res = false;
-    char term = 0;
-    std::deque<int> deque;
-    std::set<int> been_there;
-    deque.push_front(0);
-    while (!deque.empty()) {
-        int cur_idx = deque.front(), node = 0;
-        been_there.insert(cur_idx);
-        deque.pop_front();
-        for (auto it = been_there.begin();
-             it != been_there.end() && *it < deque.back(); ++it)
-        {
-            been_there.erase(it);
-        }
-        for (; cur_idx < text.size(); ++cur_idx) {
-            if (trie[node].find(0) != trie[node].end() &&
-                    been_there.find(cur_idx) == been_there.end())
-            {
-                deque.push_front(cur_idx);
-            }
-            if (trie[node].find(text[cur_idx]) != trie[node].end())
-                node = trie[node].at(text[cur_idx]);
+    std::vector<int> dp(text.size(), 0);
+    dp[0] = 1;
+    int i = 0;
+
+    for (auto r_it = dp.rend() - 1;
+        r_it != dp.rend();
+        r_it = std::find(dp.rbegin()+(dp.size()-1-i),dp.rend(),1))
+    {
+        i = dp.size() - 1 - std::distance(dp.rbegin(), r_it);
+        dp[i] = -1;
+        int node = 0;
+
+        for (; i < text.size(); ++i) {
+            if (trie[node].find(0) != trie[node].end() && !dp[i])
+                dp[i] = 1;
+
+            if (trie[node].find(text[i]) != trie[node].end())
+                node = trie[node].at(text[i]);
             else
                 break;
         }
+
         if (trie[node].find(0) != trie[node].end() &&
-                cur_idx == text.size())
+                i == text.size())
             return true;
     }
 
