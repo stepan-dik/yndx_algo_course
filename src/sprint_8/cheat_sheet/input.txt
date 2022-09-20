@@ -1,3 +1,10 @@
+sepsepdsepsepdsessepdsesepseps
+4
+s
+se
+sepd
+sep
+
 abacaba
 2
 abac
@@ -8,13 +15,6 @@ abacaba
 abac
 caba
 aba
-
-sepsepdsepsepdsessepdsesepseps
-4
-s
-se
-sepd
-sep
 
 examiwillpasstheexam
 5
