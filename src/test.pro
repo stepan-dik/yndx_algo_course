@@ -81,6 +81,7 @@ SOURCES += \
     sprint_7/levenshtein_distance/levenshtein_distance.cpp \
     sprint_7/timetable/timetable.cpp \
     sprint_8/cheat_sheet/cheat_sheet.cpp \
+    sprint_8/global_replacement/global_replacement.cpp \
     sprint_8/packed_prefix/packed_prefix.cpp \
     sprint_8/prefix_func/prefix_func.cpp \
     sprint_8/reverse_string/reverse_string.cpp \
