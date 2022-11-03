@@ -73,10 +73,12 @@ SOURCES += \
     sprint_6/railroads/railroads.cpp \
     sprint_7/backpack/backpack.cpp \
     sprint_7/dynamic_fibonacci/dynamic_fibonacci.cpp \
+    sprint_7/equal_sums/equal_sums.cpp \
     sprint_7/exchange/exchange.cpp \
     sprint_7/flower_field/flower_field.cpp \
     sprint_7/goldrush/goldrush.cpp \
     sprint_7/jumps_on_stairs/jumps_on_stairs.cpp \
+    sprint_7/levenshtein_distance/levenshtein_distance.cpp \
     sprint_7/timetable/timetable.cpp \
     sprint_8/cheat_sheet/cheat_sheet.cpp \
     work/refconnector.cpp \
