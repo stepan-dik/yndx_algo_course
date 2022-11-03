@@ -1,9 +1,9 @@
-#ifndef REFACTOR_H
-#define REFACTOR_H
+#ifndef RPCMETHOD_H
+#define RPCMETHOD_H
 
 #include <QObject>
 #include <QVariant>
-
+#include "reqtypes.h"
 
 class RpcMethod
 {
@@ -32,11 +32,11 @@ public:
     operator QString() {return toString();}
 
     const QString method() {
-        return methods.value(val, "");
+        return methods.value(val).name();
     }
 
     static const RpcMethod fromMethod(const QString name) {
-        return methods.key(name, Invalid);
+        return methods.key(getByName(name), Invalid);
     }
 
     static const RpcMethod fromString(const QString name) {
@@ -44,17 +44,18 @@ public:
     }
 
     bool isInbound() {
-        switch (val) {
-            case Invalid:                   return false;
-            case GenerateTempCode:          return false;
-            case Register:                  return false;
-            case Authorize:                 return false;
-            case RequestMenu:               return false;
-            case RequestImage:              return false;
-            case RequestTheme:              return false;
-            case CreateOrder:               return false;
-            case RemainingAmountsChanged:   return true;
-        }
+        return methods.value(val).isInbound();
+//        switch (val) {
+//            case Invalid:                   return false;
+//            case GenerateTempCode:          return false;
+//            case Register:                  return false;
+//            case Authorize:                 return false;
+//            case RequestMenu:               return false;
+//            case RequestImage:              return false;
+//            case RequestTheme:              return false;
+//            case CreateOrder:               return false;
+//            case RemainingAmountsChanged:   return true;
+//        }
         return false;
     }
 
@@ -132,7 +133,14 @@ public:
 
 private:
     Value val;
-    static const QMap<Value, QString> methods;
+    static ReqType getByName(QString name) {
+        for (auto akey: methods.keys()){
+            if (methods[akey].name() == name)
+                return methods[akey];
+        }
+        return ReqType();
+    }
+    static const QMap<Value, ReqType> methods;
 };
 
-#endif // REFACTOR_H
+#endif // RPCMETHOD_H
