@@ -81,9 +81,6 @@ SOURCES += \
     sprint_7/levenshtein_distance/levenshtein_distance.cpp \
     sprint_7/timetable/timetable.cpp \
     sprint_8/cheat_sheet/cheat_sheet.cpp \
-    work/refconnector.cpp \
-    work/rpcmethod.cpp \
-    work/reqtypes.cpp \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -96,11 +93,6 @@ HEADERS += \
     sprint_2/limited_queue.h \
     sprint_2/stack.h \
     sprint_2/stackmax.h \
-    work/macro.h \
     nodes.h \
     objects.h \
     solution.h \
-    study.h \
-    work/refconnector.h \
-    work/rpcmethod.h \
-    work/reqtypes.h
